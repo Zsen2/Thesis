@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import cv2
 from yolomodel.yolov8 import inference as yolo_inference
+from arduino.motor import motor
 import models
 from models import Batches
 from sqlalchemy.orm import Session
@@ -35,8 +36,8 @@ def gen_frames() -> Generator[bytes, None, None]:
         success, frame = camera.read()
         if success:
             if inferencing:
-                fruit_name, probs = yolo_inference(frame)
-                print(f"{fruit_name} {probs}")
+                fruit, probs = yolo_inference(frame)
+                motor(fruit, probs)
             try:
                 _, buffer = cv2.imencode('.jpg', frame)
                 frame_bytes = buffer.tobytes()
@@ -114,6 +115,4 @@ def delete_test_data(db: Session):
 
 # print("Current date:", date_string)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
