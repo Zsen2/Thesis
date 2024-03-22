@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import cv2
 from yolomodel.yolov8 import inference as yolo_inference
-from arduino.motor import motor
+#from arduino.motor import motor
 import models
 from models import Batches
 from sqlalchemy.orm import Session
@@ -37,7 +37,7 @@ def gen_frames() -> Generator[bytes, None, None]:
         if success:
             if inferencing:
                 fruit, probs = yolo_inference(frame)
-                motor(fruit, probs)
+                #motor(fruit, probs)
             try:
                 _, buffer = cv2.imencode('.jpg', frame)
                 frame_bytes = buffer.tobytes()
