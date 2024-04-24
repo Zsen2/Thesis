@@ -56,6 +56,7 @@ li.nav-link {
 }
 
 button {
+  padding-top: 30px;
   margin-top: 10px;
   width: 50%;
   height: 40px;

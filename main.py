@@ -19,7 +19,7 @@ arduino = serial.Serial(port='COM3', baudrate=2000000, timeout=.1)
 
 models.Base.metadata.create_all(bind=engine)
 
-model_path = "D:\\webPrac\\fastapi\\yolomodel\\train7.pt"
+model_path = "D:\\webPrac\\fastapi\\yolomodel\\best1.pt"
 fruit_classifier = FruitClassifier(model_path)
 
 freshCount, rottenCount = 0,0
@@ -149,9 +149,9 @@ def get_batch_number(db):
     current_date = int(datetime.now().strftime('%m%d%Y'))
 
     if last_batch:
-        last_batch_date = last_batch
+        last_batch_date = last_batch.batch_num // 1000
         if last_batch_date == current_date:
-            last_batch_number = int(last_batch.batch_num[-3:])
+            last_batch_number = last_batch.batch_num % 1000 
             next_batch_number = last_batch_number + 1
         else:
             next_batch_number = 1
@@ -159,6 +159,7 @@ def get_batch_number(db):
         next_batch_number = 1
 
     return int(f"{current_date:08d}{next_batch_number:03d}")
+
 
 
 def most_frequent(List):
