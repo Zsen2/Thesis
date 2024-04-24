@@ -37,7 +37,7 @@ body.pop {
 }
 
 ul.nav-links {
-  float: center !important;
+  float: center;
   margin: 0;
   display: flex;
   list-style: none;
@@ -49,11 +49,8 @@ li.nav-link {
   font-weight: 300;
 }
 
-.prompt {
-  display: flex;
-  width: 100%;
-}
 .main {
+  justify-content: center;
   display: inline-block;
   padding: 20px;
 }

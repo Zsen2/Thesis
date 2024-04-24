@@ -40,6 +40,8 @@
               <tr>
                 <th>Batch Number</th>
                 <th>Fruit</th>
+                <th>Fresh Count</th>
+                <th>Rotten Count</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -48,6 +50,8 @@
               <tr>
                 <td>{{ batch.batch_num }}</td>
                 <td>{{ batch.fruit }}</td>
+                <td>{{ batch.fresh_count }}</td>
+                <td>{{ batch.rotten_count }}</td>
                 <td>{{ batch.date}}</td>
               </tr>
               {% endfor %}

@@ -7,6 +7,8 @@ class Batches(Base):
     id = Column(Integer, primary_key=True)
     batch_num = Column(Integer)
     fruit = Column(String(150))
+    fresh_count = Column(Integer)
+    rotten_count = Column(Integer)
     date = Column(String(150))
  
     def __repr__(self):

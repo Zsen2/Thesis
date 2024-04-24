@@ -11,45 +11,36 @@
     <title>Home</title>
   </head>
   <body>
-    <div class="container">
-      <div class="glass-container">
-        <nav class="navbar">
-          <ul class="nav-links">
-            <li class="nav-link"><a href="#">Dash Board</a></li>
-            <li class="nav-link"><a href="/track-record">Track Record</a></li>
-            <li class="nav-link"><a href="#">About Us</a></li>
-          </ul>
-        </nav>
-        <div class="prompt">
+    <form method="post" action="/inference">
+      <div class="container">
+        <div class="glass-container">
+          <nav class="navbar">
+            <ul class="nav-links">
+              <li class="nav-link"><a href="#">Dash Board</a></li>
+              <li class="nav-link"><a href="/track-record">Track Record</a></li>
+              <li class="nav-link"><a href="#">About Us</a></li>
+            </ul>
+          </nav>
           <div class="main">
             <h2>Fruit Sorter</h2>
             <div class="image-wrapper">
-              <img src="/video_feed " alt="No Camera Detected" />
+              <img src="/video_feed" alt="No Camera Detected" />
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-              Sequi nulla odit pariatur ab velit sapiente dolorem <br />
-              totam corporis iure? Perferendis odit deleniti autem <br />
-              molestiae ullam! Alias ratione architecto dolore aliquam.
-            </p>
-            <form method="post" action="/inference">
-              {% if not inferencing %}
-              <button type="button" onclick="openPopup()">New Batch</button>
-              {% else %}
-              <button type="submit" id="stopBtn" value="False" name="inference">
-                Stop
-              </button>
-              {% endif %}
-            </form>
+            {% if not inferencing %}
+            <button type="button" onclick="openPopup()">New Batch</button>
+            {% else %}
+            <button type="submit" id="stopBtn" value="False" name="inference">
+              Stop
+            </button>
+            {% endif %}
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="pop-up-overlay">
-      <div class="pop-up">
-        <h2>Select a Fruit</h2>
-        <form method="post" action="/select_fruit">
+    </form>
+    <form method="post" action="/select_fruit">
+      <div class="pop-up-overlay">
+        <div class="pop-up">
+          <h2>Select a Fruit</h2>
           <div class="radio-tiles">
             <input
               class="radio__input"
@@ -76,23 +67,18 @@
             />
             <label class="radio__label" for="orange">Orange</label>
           </div>
-        </form>
-        <div class="popBtn">
-          <form method="post" action="/inference">
+          <div class="popBtn">
             {% if not inferencing %}
             <input type="hidden" name="inference" value="True" />
-            <button type="button" onclick="if (check()) this.form.submit();">
-              Start
-            </button>
+            <button type="submit" onclick="return check();">Start</button>
             {% endif %}
-          </form>
-          <p id="error-message" style="color: red; display: none">
-            Please select a fruit.
-          </p>
+            <p id="error-message" style="color: red; display: none">
+              Please select a fruit.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-
+    </form>
     <script src="/static/index.js"></script>
   </body>
 </html>

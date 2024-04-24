@@ -1,13 +1,15 @@
 from ultralytics import YOLO
+import numpy as np
 
-model = YOLO("D:\webPrac\\fastapi\yolomodel\yolov8.pt")
+class FruitClassifier:
+    def __init__(self, model_path):
+        self.model = YOLO(model_path)
 
-def inference(frame):
-    results = model.predict(source=frame)
+    def inference(self, frame):
+        results = self.model(frame)
+        names_dict = results[0].names
+        probs = results[0].probs.data.tolist()
+        max_prob_index = np.argmax(probs)
+        predicted_class = names_dict[max_prob_index]
 
-    names = results[0].names
-    fruit_name = names[results[0].probs.top1]
-    probs = results[0].probs.top1conf.cpu()
-
-    return fruit_name, probs
-
+        return predicted_class, probs[max_prob_index]
