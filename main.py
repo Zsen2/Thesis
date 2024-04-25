@@ -162,13 +162,12 @@ def get_batch_number(db):
 
 
 
-def most_frequent(List):
-    # Filter out occurrences of 'No Fruit' from the list
-    filtered_list = [item for item in List if item != 'No Fruit']
-    # Return the most frequent element from the filtered list
-    return max(set(filtered_list), key=filtered_list.count)
+def most_frequent(lst):
+    filtered_list = [item for item in lst if item != 'No Fruit']
+    if filtered_list:
+        return max(set(filtered_list), key=filtered_list.count)
+    return None
 
-#
 # def treatData(fruit_class):
 #     global freshCount, rottenCount, fruit_sequence
 #     thres = 10
@@ -200,7 +199,7 @@ def treatData(fruit_class):
         else:
             prev_fruit = fruit_sequence[-2] if len(fruit_sequence) > 1 else None
             if prev_fruit in ['Grade 1', 'Grade 2', 'Grade 3']:
-                if most_frequent(fruit_sequence) == 'Grade 1' or most_frequent(fruit_sequence) == 'Grade 2':
+                if most_frequent(fruit_sequence) in ['Grade 1', 'Grade 2']:
                     freshCount += 1
                 elif most_frequent(fruit_sequence) == 'Grade 3':
                     servo(arduino)
